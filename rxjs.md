@@ -1,5 +1,43 @@
 # Rxjs cheat sheet
 
+## Subjects
+
+### [Subject](https://rxjs.dev/api/index/class/Subject)
+
+Special type of Observable that allows values to be multicasted to many Observers. Subjects are like EventEmitters.
+Get value on first emitting after subscribe
+
+```ts
+import { Subject } from 'rxjs';
+
+const subject = new Subject<string>();
+
+subject.next('Toto');
+
+subject.subscribe(console.log); // Nothing logged
+
+subject.next('test'); // Log : "test"
+subject.complete();
+subject.next('test 1'); // Nothing logged
+```
+
+### [BehaviorSubject]()
+
+It is like subject but it has a default value and get value on subscribe. We can get value at any time too.
+
+```ts
+import { BehaviorSubject } from 'rxjs';
+
+const subject = new BehaviorSubject<string>('first value');
+
+subject.subscribe(console.log); // Log : "first value"
+
+subject.next('test'); // Log : "test"
+subject.complete();
+subject.next('test 1'); // Nothing logged
+console.log(subject.value); // Log : "test 1"
+```
+
 ## Combination
 
 ### [combineLatest](https://rxjs.dev/api/operators/combineLatest)
