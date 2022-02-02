@@ -1,10 +1,8 @@
 # Rxjs cheat sheet
 
-## Operators
+## Combination
 
-### Combination
-
-**[combineLatest](https://rxjs.dev/api/operators/combineLatest)**
+### [combineLatest](https://rxjs.dev/api/operators/combineLatest)
 > (deprecated, see combineLatestWith)
 
 Emit last value of all observables once they've all emit once.
@@ -22,7 +20,7 @@ obs1.next('test1 1');
 obs2.next('test2'); // Log : ["test1 1", "test2"]
 ```
 
-**[combineLatestWith](https://rxjs.dev/api/operators/combineLatestWith)**
+### [combineLatestWith](https://rxjs.dev/api/operators/combineLatestWith)
 
 ```ts
 import { Subject } from 'rxjs';
@@ -38,7 +36,7 @@ obs1.next('test1 1');
 obs2.next('test2'); // Log : ["test1 1", "test2"]
 ```
 
-**[zip](https://rxjs.dev/api/operators/zip)**
+### [zip](https://rxjs.dev/api/operators/zip)
 >(deprecated, see zipWith)
 
 Emit values by emit index of all observables once they've all emit once
@@ -57,7 +55,7 @@ obs2.next('test2'); // Log : ["test1", "test2"]
 obs2.next('test2 2'); // Log : ["test1 1", "test2 2"]
 ```
 
-**[zipWith](https://rxjs.dev/api/operators/zipWith)**
+### [zipWith](https://rxjs.dev/api/operators/zipWith)
 
 ```ts
 import { zipWith } from 'rxjs/operators';
@@ -75,7 +73,7 @@ obs2.next('test2'); // Log : ["test1", "test2"]
 obs2.next('test2 2'); // Log : ["test1 1", "test2 2"]
 ```
 
-**[merge](https://rxjs.dev/api/operators/merge)**
+### [merge](https://rxjs.dev/api/operators/merge)
 
 Emit once one of the observable emit. No possibility to know wich one has emitted.
 
@@ -91,7 +89,7 @@ obs1.next('test1'); // Log : test1
 obs2.next('test2'); // Log : test2
 ```
 
-**[race](https://rxjs.dev/api/operators/race)**
+### [race](https://rxjs.dev/api/operators/race)
 
 Emit values of the first observable that has emitted. No possibility to know wich one has emitted.
 
@@ -108,7 +106,7 @@ obs2.next('test2');
 obs1.next('test1 1'); // Log : test1 1
 ```
 
-**[forkJoin](https://rxjs.dev/api/index/function/forkJoin)**
+### [forkJoin](https://rxjs.dev/api/index/function/forkJoin)
 
 Emit all values once all observable completed
 
@@ -127,7 +125,7 @@ obs1.complete();
 obs2.complete(); // Log : ["test1 1", "test2"]
 ```
 
-**[from](https://rxjs.dev/api/index/function/from)**
+### [from](https://rxjs.dev/api/index/function/from)
 
 Emit elements of an array
 
@@ -141,9 +139,9 @@ from([1,2,3]).subscribe(console.log)
 // 3
 ```
 
-### Transformation
+## Transformation
 
-**[map](https://rxjs.dev/api/operators/map)**
+### [map](https://rxjs.dev/api/operators/map)
 
 Transform value to a new one
 
@@ -157,7 +155,7 @@ obs1.pipe(map((res) => res + ' mapped')).subscribe(console.log);
 obs1.next('test1'); // Log : test1 mapped
 ```
 
-**[mapTo](https://rxjs.dev/api/operators/mapTo)**
+### [mapTo](https://rxjs.dev/api/operators/mapTo)
 
 Transform to a constant
 
@@ -172,7 +170,7 @@ obs1.pipe(mapTo('TOTO')).subscribe(console.log);
 obs1.next('test1'); // Log : TOTO
 ```
 
-**[mergeMap](https://rxjs.dev/api/operators/mergeMap)**
+### [mergeMap](https://rxjs.dev/api/operators/mergeMap)
 
 When first emit, call second and map the value.
 
@@ -196,7 +194,7 @@ from([1,2,3,4]).pipe(
 // retrieved new data with param 4
 ```
 
-**[switchMap](https://rxjs.dev/api/operators/switchMap)**
+### [switchMap](https://rxjs.dev/api/operators/switchMap)
 
 When first emit, call second and map the value. The difference with mergeMap is that second cancel first call if loading.
 
@@ -216,9 +214,9 @@ from([1,2,3,4]).pipe(
 // Log after one second : retrieved new data with param 4
 ```
 
-### Filtering
+## Filtering
 
-**[distinctUntilChanged](https://rxjs.dev/api/operators/distinctUntilChanged)**
+### [distinctUntilChanged](https://rxjs.dev/api/operators/distinctUntilChanged)
 
 Emit when value change from last.
 
