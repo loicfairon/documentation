@@ -215,3 +215,25 @@ from([1,2,3,4]).pipe(
 ).subscribe(val => console.log(val));
 // Log after one second : retrieved new data with param 4
 ```
+
+### Filtering
+
+**[distinctUntilChanged](https://rxjs.dev/api/operators/distinctUntilChanged)**
+
+Emit when value change from last.
+
+```ts
+import { Subject } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
+
+const obs = new Subject();
+
+// This is the default comparator.
+const comparator = (a, b) => a === b;
+
+obs.pipe(distinctUntilChanged(comparator)).subscribe(console.log);
+
+obs.next('test'); // Log : "test"
+obs.next('test');
+obs.next('test 1'); // Log : "test 1"
+```
